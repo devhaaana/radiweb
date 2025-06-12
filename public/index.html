@@ -1,0 +1,63 @@
+<html lang="ko">
+<head>
+	<meta charset="UTF-8" />
+	<title>Radiko Live</title>
+	<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/icon/favicon-96x96.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-icon-180x180.png">
+	<link rel="manifest" href="/assets/icon/manifest.json">
+</head>
+<body>
+	<div class="radio-dashboard">
+		<aside class="station-map">
+			<div id="map"></div>
+		</aside>
+
+		<div class="station-list-container">
+			<div id="station-count">Station: 0</div>
+			<aside class="station-list"></aside>
+		</div>
+
+		<main class="player-section">
+			<div class="now-playing">
+				<img src="assets/image/radiweb-icon.png" alt="Current Station" class="station-cover" />
+				<div class="program-info-container">
+					<h2 class="program-title">radiweb</h2>
+				</div>
+				<div class="program-info-container">
+					<h4 class="program-performer"></h4>
+				</div>
+			</div>
+			<div class="progress-container">
+				<progress id="progress-bar" value="0" max="100"></progress>
+				<div class="progress-time-range">
+					<span id="start-time">00:00</span>
+					<span id="end-time">00:00</span>
+				</div>
+			</div>
+			<div class="controls">
+				<button id="playPauseBtn"><i class="bi bi-play-circle-fill"></i></button>
+			</div>
+			<div class="volume-wrapper">
+				<i id="volume-icon" class="bi bi-volume-up"></i>
+				<input type="range" id="volume-control" min="0" max="10" value="5">
+			</div>
+		</main>
+	</div>
+	<footer id="copyright">
+		© 2025. <a href="https://github.com/devhaaana" target="_blank" rel="noopener noreferrer">devhaaana</a>. All rights reserved.
+	</footer>
+	<audio id="player" autoplay></audio>
+	
+</body>
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	<script src="assets/js/geojson.js"></script>
+	<script src="assets/js/radiko.js"></script>
+	<script src="assets/js/audio.js"></script>
+</html>

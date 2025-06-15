@@ -1,0 +1,341 @@
+body {
+	font-family: sans-serif;
+	color      : #242426;
+	padding    : 2rem;
+
+    -webkit-user-select: none;
+    -khtml-user-select : none;
+    -moz-user-select   : none;
+    -o-user-select     : none;
+    user-select        : none;
+
+    -webkit-user-drag: none;
+    -khtml-user-drag : none;
+    -moz-user-drag   : none;
+    -ms-user-select  : none;
+    -o-user-drag     : none;
+    user-drag        : none;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag : none;
+    -moz-user-drag   : none;
+    -ms-user-drag    : none;
+    -o-user-drag     : none;
+    user-drag        : none;
+}
+
+button {
+	font-size : 1rem;
+	padding   : 0.5rem 1rem;
+	margin-top: 1rem;
+}
+
+video {
+	width     : 600px;
+	max-width : 100%;
+	margin-top: 1rem;
+	border    : 1px solid #ccc;
+}
+
+.leaflet-tile-pane {
+	filter: brightness(0) invert(1);
+}
+
+.radio-dashboard {
+	display         : flex;
+	max-width       : 80rem;
+	height          : 60rem;
+	margin          : 2rem auto;
+	border          : 1px solid #ddd;
+	border-radius   : 12px;
+	overflow        : hidden;
+	box-shadow      : 0 4px 8px rgba(0,0,0,0.1);
+	background-color: #fff;
+}
+
+#station-count {
+	position   : sticky;
+	top        : 0;
+	padding    : 8px 12px;
+	font-weight: bold;
+	z-index    : 10;
+	text-align : center;
+}
+.station-list-container {
+  display         : flex;
+  flex-direction  : column;
+  background-color: #fafafa;
+  border-right    : 1px solid #eee;
+}
+
+#station-count {
+  order        : 0;
+  margin-bottom: 8px;
+}
+
+.station-list {
+	width     : 20rem;
+	overflow-y: auto;
+	padding   : 1rem;
+	margin-top: 1rem;
+}
+
+.station-card {
+	display      : flex;
+	align-items  : center;
+	margin-bottom: 1rem;
+	border-radius: 8px;
+	cursor       : pointer;
+	transition   : background 0.3s;
+}
+
+.station-card.selected,
+.station-card:hover {
+	background-color: #e6f7ff;
+}
+
+.station-card img {
+	width        : 80px;
+	border-radius: 8px;
+	margin-right : 1rem;
+	object-fit   : cover;
+}
+
+.player-section {
+	width          : 30rem;
+	flex-grow      : 1;
+	padding        : 2rem;
+	display        : flex;
+	flex-direction : column;
+	justify-content: center;
+	align-items    : center;
+}
+
+.now-playing {
+	text-align: center;
+}
+
+.station-cover {
+	width        : 300px;
+	border-radius: 16px;
+	object-fit   : cover;
+	margin-bottom: 1rem;
+}
+
+.controls button {
+	font-size       : 2rem;
+	cursor          : pointer;
+	border          : none;
+	background-color: transparent;
+}
+
+.station-map {
+	width: 30rem;
+}
+
+#map {
+	height: 100%;
+}
+
+.leaflet-tile-pane {
+	filter: brightness(0) invert(1);
+}
+.leaflet-interactive:focus {
+	outline   : none !important;
+	box-shadow: none !important;
+}
+
+.program-info-container {
+	width    : 300px;
+	max-width: 300px;
+	overflow : hidden;
+	position : relative;
+}
+
+.program-title,
+.program-performer {
+	width      : 100%;
+	max-width  : 100%;
+	white-space: nowrap;
+	overflow   : visible;
+	display    : block;
+	position   : relative;
+}
+
+.program-title.scroll,
+.program-performer.scroll {
+	will-change: transform;
+	animation  : marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.marquee {
+	display        : flex;
+	width          : max-content;
+	animation      : scroll-left 20s linear infinite;
+	animation-delay: 3s;
+}
+
+.marquee span {
+	white-space  : nowrap;
+	padding-right: 50px;
+}
+
+@keyframes scroll-left {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+.progress-container {
+	width     : 300px;
+	margin-top: 10px;
+}
+
+#progress-bar {
+	width             : 100%;
+	height            : 6px;
+	border-radius     : 3px;
+	background-color  : #ebebf0;
+	appearance        : none;
+	-webkit-appearance: none;
+	overflow          : hidden;
+}
+
+#progress-bar::-webkit-progress-bar {
+	background-color: #ebebf0;
+}
+
+#progress-bar::-webkit-progress-value {
+	background-color: #00A7E9;
+	border-radius   : 3px;
+}
+
+#progress-bar::-moz-progress-bar {
+	background-color: #00A7E9;
+	border-radius   : 3px;
+}
+
+.progress-time-range {
+	display        : flex;
+	justify-content: space-between;
+	margin-top     : 6px;
+	font-size      : 0.875rem;
+	color          : #545456;
+}
+
+#playPauseBtn {
+	font-size: 2rem;
+	color    : #545456;
+}
+
+.volume-wrapper {
+	width          : 300px;
+	display        : flex;
+	justify-content: center;
+	align-items    : center;
+	gap            : 10px;
+	margin-top     : 1rem;
+}
+
+#volume-icon {
+	font-size: 2rem;
+	color    : #545456;
+}
+
+#volume-icon.muted {
+  color: #d8d8dc;
+}
+
+input[type="range"]#volume-control {
+	-webkit-appearance: none;
+	appearance        : none;
+
+	width     : 100%;
+	height    : 6px;
+	background: linear-gradient(
+		to right,
+		#00A7E9 0%,
+		#00A7E9 calc(var(--value) * 1%),
+		#ebebf0 calc(var(--value) * 1%),
+		#ebebf0 100%
+	);
+
+	border-radius: 5px;
+	outline      : none;
+	cursor       : pointer;
+}
+
+input[type="range"]#volume-control::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance        : none;
+
+	width        : 16px;
+	height       : 16px;
+	background   : #00A7E9;
+	border-radius: 50%;
+	border       : 2px solid #fff;
+	box-shadow   : 0 0 4px rgba(0,0,0,0.3);
+	transition   : background 0.3s;
+}
+
+input[type="range"]#volume-control::-webkit-slider-thumb:hover {
+	background: #00A7E9;
+}
+
+input[type="range"]#volume-control::-moz-range-thumb {
+	width        : 16px;
+	height       : 16px;
+	background   : #00A7E9;
+	border-radius: 50%;
+	border       : 2px solid #fff;
+	cursor       : pointer;
+}
+
+input[type="range"]#volume-control::-moz-range-track {
+	background   : #242426;
+	height       : 6px;
+	border-radius: 5px;
+}
+
+#copyright {
+	text-align : center;
+	color      : #545456;
+	padding    : 1rem;
+	font-size  : 1rem;
+	flex-shrink: 0;
+}
+
+#copyright a {
+	text-decoration: none;
+	color          : inherit;
+	transition     : color 0.3s ease;
+}
+
+#copyright a:hover,
+#copyright a:focus {
+	color          : #FBBC05;
+	text-decoration: none;
+}
+
+  /*
+f2f2f7
+ebebf0
+d8d8dc
+
+242426
+545456
+*/

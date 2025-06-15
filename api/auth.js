@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const { Buffer } = require('buffer');
 const crypto = require('crypto');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config({ path: '.env.local' });

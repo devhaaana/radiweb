@@ -15,7 +15,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "fast-xml-parser": "^5.2.3",
-    "node-fetch": "^3.3.2"
+    "fast-xml-parser": "^5.2.3"
   }
 }

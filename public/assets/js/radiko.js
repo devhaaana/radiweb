@@ -320,6 +320,18 @@ let hls;
 
 function playHlsStream(finalUrl) {
 	const video = document.getElementById('player');
+
+	const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+	if (isSafari && video.canPlayType('application/vnd.apple.mpegurl')) {
+		video.src = finalUrl;
+		video.addEventListener('loadedmetadata', () => {
+			const seekTime = Math.max(video.duration - 5, 0);
+			video.currentTime = seekTime;
+			video.play();
+		});
+		return;
+	}
+
 	if (Hls.isSupported()) {
 		if (hls) {
 			hls.destroy();

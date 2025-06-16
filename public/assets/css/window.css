@@ -1,0 +1,30 @@
+@media (max-width: 768px) {
+	.radio-dashboard {
+		height: auto;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	.station-map,
+	.station-list-container,
+	.player-section {
+		width: 100%;
+		flex-shrink: 0;
+	}
+	.station-map {
+		height: 40rem;
+		z-index: 1;
+	}
+	.station-list-container {
+		order: 1;
+		height: 30rem;
+		overflow-y: auto;
+		background: white;
+		z-index: 2;
+	}
+	.player-section {
+		order: 2;
+		z-index: 1;
+		padding-left: 0;
+	}
+}

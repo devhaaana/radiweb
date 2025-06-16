@@ -68,10 +68,11 @@ video {
 	text-align : center;
 }
 .station-list-container {
-  display         : flex;
-  flex-direction  : column;
-  background-color: #fafafa;
-  border-right    : 1px solid #eee;
+	width: 30rem;
+	display         : flex;
+	flex-direction  : column;
+	background-color: #fafafa;
+	border-right    : 1px solid #eee;
 }
 
 #station-count {
@@ -80,7 +81,7 @@ video {
 }
 
 .station-list {
-	width     : 20rem;
+	/* width     : 20rem; */
 	overflow-y: auto;
 	padding   : 1rem;
 	margin-top: 1rem;
@@ -343,3 +344,20 @@ d8d8dc
 242426
 545456
 */
+
+.station-list::-webkit-scrollbar {
+	width: 10px;
+}
+
+.station-list::-webkit-scrollbar-track {
+	background: #fafafa;
+}
+
+.station-list::-webkit-scrollbar-thumb {
+	background-color: #00A7E9;
+	border-radius: 5px;
+}
+
+.station-list::-webkit-scrollbar-button {
+    display: none;
+}

@@ -270,48 +270,50 @@ async function playStream(stationId, areaId) {
 		}
 
 		// 다음 프로그램 자동 로드
-        if (programInfo?.to) {
-            const endTime = parseRadikoTime(programInfo.to);
+		if (programInfo?.to) {
+			const endTime = parseRadikoTime(programInfo.to);
 
-            clearInterval(window.programEndWatcher);
-            window.programEndWatcher = setInterval(async () => {
-                if (Date.now() >= endTime) {
-                    clearInterval(window.programEndWatcher);
+			clearInterval(window.programEndWatcher);
+			window.programEndWatcher = setInterval(async () => {
+				if (Date.now() >= endTime) {
+					clearInterval(window.programEndWatcher);
 
-                    const nextProgramInfo = await getProgramInfo(stationId, getCurrentDate());
-                    if (nextProgramInfo) {
-                        window.currentProgramInfo = nextProgramInfo;
+					setTimeout(async () => {
+						const nextProgramInfo = await getProgramInfo(stationId, getCurrentDate());
+						if (nextProgramInfo) {
+							window.currentProgramInfo = nextProgramInfo;
 
-                        const ft = parseRadikoTime(nextProgramInfo.ft);
-                        const to = parseRadikoTime(nextProgramInfo.to);
-                        const duration = (to - ft) / 1000;
-                        const start = ft;
+							const ft = parseRadikoTime(nextProgramInfo.ft);
+							const to = parseRadikoTime(nextProgramInfo.to);
+							const duration = (to - ft) / 1000;
+							const start = ft;
 
-                        updateProgressBar(start, duration);
-                        clearInterval(window.progressTimer);
-                        window.progressTimer = setInterval(() => {
-                            updateProgressBar(start, duration);
-                        }, 1000);
+							updateProgressBar(start, duration);
+							clearInterval(window.progressTimer);
+							window.progressTimer = setInterval(() => {
+								updateProgressBar(start, duration);
+							}, 1000);
 
-                        const programTitle = document.querySelector('.program-title');
-                        const programPerformer = document.querySelector('.program-performer');
-                        const programImage = document.querySelector('.station-cover');
+							const programTitle = document.querySelector('.program-title');
+							const programPerformer = document.querySelector('.program-performer');
+							const programImage = document.querySelector('.station-cover');
 
-                        if (programTitle) {
-                            programTitle.textContent = nextProgramInfo.title || 'Untitle';
-                            checkAndAnimateText(programTitle, nextProgramInfo.title || 'Untitle');
-                        }
-                        if (programPerformer) {
-                            programPerformer.textContent = nextProgramInfo.performer || 'Unknown';
-                            checkAndAnimateText(programPerformer, nextProgramInfo.performer || 'Unknown');
-                        }
-                        if (programImage) {
-                            programImage.src = nextProgramInfo.image || 'assets/image/radiweb-icon.svg';
-                        }
-                    }
-                }
-            }, 10000);
-        }
+							if (programTitle) {
+								programTitle.textContent = nextProgramInfo.title || 'Untitle';
+								checkAndAnimateText(programTitle, nextProgramInfo.title || 'Untitle');
+							}
+							if (programPerformer) {
+								programPerformer.textContent = nextProgramInfo.performer || 'Unknown';
+								checkAndAnimateText(programPerformer, nextProgramInfo.performer || 'Unknown');
+							}
+							if (programImage) {
+								programImage.src = nextProgramInfo.image || 'assets/image/radiweb-icon.svg';
+							}
+						}
+					}, 5000);
+				}
+			}, 10000);
+		}
 
 	} catch (err) {
 		console.error('❌ [Error] 스트림 재생 중 오류:', err);

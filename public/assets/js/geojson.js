@@ -85,7 +85,12 @@ window.addEventListener('load', () => {
                     fillOpacity: 0.7
                 }),
                 onEachFeature: (feature, layer) => {
-                    const name = feature.properties.nam_kr || feature.properties.nam_ja;
+                    // const name = feature.properties.nam_kr || feature.properties.nam_ja || feature.properties.nam;
+                    const nameJa = feature.properties.nam_ja || '';
+                    const nameKr = feature.properties.nam_kr || '';
+                    const nameEn = feature.properties.nam || '';
+                    const name = `${nameJa} | ${nameKr} | ${nameEn}`;
+
                     layer.bindTooltip(name);
 
                     layer.on('click', () => {

@@ -73,7 +73,7 @@ function checkAndAnimateText(elem, text) {
 
 async function loadStationList(filterAreaId = null) {
 	const xmlText = await getAvailableStations();
-
+	
 	if (!xmlText) {
 		alert('방송국 목록을 불러오는데 실패했습니다.');
 		return;
@@ -90,7 +90,7 @@ async function loadStationList(filterAreaId = null) {
 		return;
 	}
 	container.innerHTML = '';
-
+	
 	stations.forEach(station => {
 		const id = station.querySelector('id')?.textContent || '';
 		const name = station.querySelector('name')?.textContent || id;
@@ -129,6 +129,41 @@ async function loadStationList(filterAreaId = null) {
             if (programImage) {
                 programImage.src = programInfo?.image || 'assets/image/radiweb-icon.svg';
             }
+
+			setNowPlaying({
+				title: programInfo?.title,
+				artist: programInfo?.performer,
+				artworkUrl: programInfo?.image,
+			});
+
+			const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+			const audio = document.getElementById('player');
+
+			if ('setPositionState' in navigator.mediaSession && programInfo?.ft && programInfo?.to) {
+				const start = parseRadikoTime(programInfo.ft);
+				const end = parseRadikoTime(programInfo.to);
+				const duration = (end - start) / 1000;
+				// const position = Math.max(0, Math.min((Date.now() - start) / 1000, duration));
+				const position = Math.max(0, Math.min((Date.now() - start - 5000) / 1000, duration));
+
+				if (isIOS) {
+					clearInterval(window.positionUpdater);
+					window.positionUpdater = setInterval(() => {
+							navigator.mediaSession.setPositionState({
+							duration: duration,
+							position: position,
+							playbackRate: 1.0
+						});
+					}, 1000);
+				}
+				else {
+					navigator.mediaSession.setPositionState({
+						duration: duration,
+						position: position,
+						playbackRate: 1.0
+					});
+				}
+			}
 		};
 		const logo = document.createElement('img');
 		logo.src = logo_url;
@@ -216,7 +251,6 @@ async function playStream(stationId, areaId) {
 	
 	try {
 		const authRes = await fetch(`/api/auth?area_id=${areaId}`);
-		// const { token } = await authRes.json();
 		if (!authRes.ok) {
 			const text = await authRes.text();
 			console.error(`❌ [Auth API 오류] ${authRes.status}: ${text}`);
@@ -310,6 +344,41 @@ async function playStream(stationId, areaId) {
 								programImage.src = nextProgramInfo.image || 'assets/image/radiweb-icon.svg';
 							}
 						}
+
+						setNowPlaying({
+							title: nextProgramInfo?.title,
+							artist: nextProgramInfo?.performer,
+							artworkUrl: nextProgramInfo?.image,
+						});
+
+						const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+						const audio = document.getElementById('player');
+
+						if ('setPositionState' in navigator.mediaSession && programInfo?.ft && programInfo?.to) {
+							const start = parseRadikoTime(programInfo.ft);
+							const end = parseRadikoTime(programInfo.to);
+							const duration = (end - start) / 1000;
+							// const position = Math.max(0, Math.min((Date.now() - start) / 1000, duration));
+							const position = Math.max(0, Math.min((Date.now() - start - 5000) / 1000, duration));
+
+							if (isIOS) {
+								clearInterval(window.positionUpdater);
+								window.positionUpdater = setInterval(() => {
+										navigator.mediaSession.setPositionState({
+										duration: duration,
+										position: position,
+										playbackRate: 1.0
+									});
+								}, 1000);
+							}
+							else {
+								navigator.mediaSession.setPositionState({
+									duration: duration,
+									position: position,
+									playbackRate: 1.0
+								});
+							}
+						}
 					}, 5000);
 				}
 			}, 10000);
@@ -369,15 +438,15 @@ async function getProgramInfo(stationId, date) {
 let hls;
 
 function playHlsStream(finalUrl) {
-	const video = document.getElementById('player');
+	const audio = document.getElementById('player');
 
 	const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-	if (isSafari && video.canPlayType('application/vnd.apple.mpegurl')) {
-		video.src = finalUrl;
-		video.addEventListener('loadedmetadata', () => {
-			const seekTime = Math.max(video.duration - 5, 0);
-			video.currentTime = seekTime;
-			video.play();
+	if (isSafari && audio.canPlayType('application/vnd.apple.mpegurl')) {
+		audio.src = finalUrl;
+		audio.addEventListener('loadedmetadata', () => {
+			const seekTime = Math.max(audio.duration - 5, 0);
+			audio.currentTime = seekTime;
+			audio.play();
 		});
 		return;
 	}
@@ -388,20 +457,20 @@ function playHlsStream(finalUrl) {
 		}
 		hls = new Hls();
 		hls.loadSource(finalUrl);
-		hls.attachMedia(video);
+		hls.attachMedia(audio);
 
 		hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            const seekTime = Math.max(video.duration - 5, 0);
-			video.currentTime = seekTime;
-			video.play();
+            const seekTime = Math.max(audio.duration - 5, 0);
+			audio.currentTime = seekTime;
+			audio.play();
 		});
 
-	} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-		video.src = finalUrl;
-		video.addEventListener('loadedmetadata', () => {
-            const seekTime = Math.max(video.duration - 5, 0);
-            video.currentTime = seekTime;
-			video.play();
+	} else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+		audio.src = finalUrl;
+		audio.addEventListener('loadedmetadata', () => {
+            const seekTime = Math.max(audio.duration - 5, 0);
+            audio.currentTime = seekTime;
+			audio.play();
 		});
 	} else {
 		alert('HLS 스트리밍을 지원하지 않는 브라우저입니다.');
@@ -409,19 +478,19 @@ function playHlsStream(finalUrl) {
 }
 
 document.getElementById('playPauseBtn').addEventListener('click', () => {
-	const video = document.getElementById('player');
+	const audio = document.getElementById('player');
 	const icon = document.querySelector('#playPauseBtn i');
 
-	if (video.paused) {
+	if (audio.paused) {
 		if (hls) {
 			hls.startLoad();
 		}
-        const seekTime = Math.max(video.duration - 5, 0);
-        video.currentTime = seekTime;
-		video.play();
+        const seekTime = Math.max(audio.duration - 5, 0);
+        audio.currentTime = seekTime;
+		audio.play();
 		icon.className = 'bi bi-pause-circle-fill';
 	} else {
-		video.pause();
+		audio.pause();
 		icon.className = 'bi bi-play-circle-fill';
 	}
 });
@@ -431,3 +500,4 @@ window.onload = () => {
 };
 
 window.loadStationList = loadStationList;
+window.setNowPlaying = setNowPlaying;

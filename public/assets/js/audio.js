@@ -37,3 +37,25 @@ function updateVolumeSlider() {
         }
     }
 }
+
+function setNowPlaying({ title, artist, artworkUrl }) {
+    if (!('mediaSession' in navigator)) return;
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+        title: title || 'Now Playing ₩',
+        artist: artist || 'Radiweb',
+        album: 'Live',
+        artwork: [
+            {
+                src: artworkUrl,
+                sizes: '512x512',
+                type: 'image/jpeg',
+            },
+        ],
+    });
+
+    if (audio) {
+        navigator.mediaSession.setActionHandler('play', () => audio.play());
+        navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    }
+}

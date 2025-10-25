@@ -5,8 +5,20 @@
 }
 
 @media (max-width: 768px) {
+	:root {
+		--base-padding: 1rem;
+	}
+	.navigation .navigation-logo a img {
+		height: 1.5rem;
+	}
+	.navigation .navigation-menu a {
+		padding-left   : 1rem;
+	}
+	.navigation .navigation-menu .language-selector {
+		padding-left   : 1rem;
+	}
 	main {
-		background-color: aqua;
+		padding: 1rem var(--base-padding);
 	}
 	main #dashboard {
 		height: fit-content;
@@ -24,7 +36,7 @@
 		width      : 100%;
 	}
 	.station-map {
-		height : 40rem;
+		height : 15rem;
 		z-index: 1;
 	}
 	.station-list-container {
@@ -38,5 +50,6 @@
 		order       : 2;
 		z-index     : 1;
 		padding-left: 0;
+		height: fit-content;
 	}
 }

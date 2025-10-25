@@ -1,0 +1,23 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nam_ja": "테스트 구역"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [135.0, 35.5],
+            [135.0, 35.6],
+            [135.1, 35.6],
+            [135.1, 35.5],
+            [135.0, 35.5]
+          ]
+        ]
+      }
+    }
+  ]
+}

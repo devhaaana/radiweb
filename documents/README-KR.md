@@ -2,11 +2,18 @@
 
   [![radiweb](/images/banner.svg)](#readme)
 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE "License")
+  [![License: All Rights Reserved](https://img.shields.io/badge/License-All%20Rights%20Reserved-black.svg?style=for-the-badge)](LICENSE)
   [![Release version](https://img.shields.io/github/release/devhaaana/radiweb.svg?label=Download&style=for-the-badge)](#release-files "Release Files")
   [![Commits](https://img.shields.io/github/commit-activity/y/devhaaana/radiweb.svg?label=commits&style=for-the-badge)](https://github.com/devhaaana/radiweb/commits "Commit History")
   [![Last Commit](https://img.shields.io/github/last-commit/devhaaana/radiweb.svg?label=&style=for-the-badge&display_timestamp=committer)](https://github.com/devhaaana/radiweb/pulse/monthly "Last Commit")
 
+  <br />
+
+  ![Coverage](https://img.shields.io/badge/coverage-95%25-green?style=for-the-badge)
+  ![Codacy grade](https://img.shields.io/codacy/grade/6c7d88a1115945a9bfdb5a587f8744a9?style=for-the-badge)
+  ![Stars](https://img.shields.io/github/stars/devhaaana/radiweb?style=for-the-badge)
+  ![Issues](https://img.shields.io/github/issues/devhaaana/radiweb?style=for-the-badge)
+  
 </div>
 
 <br />
@@ -60,8 +67,8 @@ PC(HTML5) 버전의 Radiko는 사용자의 위치를 IP 주소를 통해 인증�
 
 | 파일                                                                                    | 설명                                                        |
 | :-------------------------------------------------------------------------------------- | :----------------------------------------------------------------- |
-| [radiweb-2.0.0.zip](https://github.com/devhaaana/radiweb/archive/refs/tags/v2.0.0.zip)       | radiweb v2.0.0의 전체 소스 코드가 포함된 *ZIP* 파일 |
-| [radiweb-2.0.0.tar.gz](https://github.com/devhaaana/radiweb/archive/refs/tags/v2.0.0.tar.gz) | radiweb v2.0.0의 전체 소스 코드가 포함된 *TAR.GZ* 파일 |
+| [radiweb-3.0.0.zip](https://github.com/devhaaana/radiweb/archive/refs/tags/v3.0.0.zip)       | radiweb v3.0.0의 전체 소스 코드가 포함된 *ZIP* 파일 |
+| [radiweb-3.0.0.tar.gz](https://github.com/devhaaana/radiweb/archive/refs/tags/v3.0.0.tar.gz) | radiweb v3.0.0의 전체 소스 코드가 포함된 *TAR.GZ* 파일 |
 
 ## 참고
 
